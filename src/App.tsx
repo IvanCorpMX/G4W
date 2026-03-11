@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Link, useParams, useLocation } from 'reac
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Building2, 
-  Settings, 
   CheckCircle2, 
   ArrowRight, 
   Mail, 
@@ -13,46 +12,32 @@ import {
   X,
   ShieldCheck,
   BarChart3,
-  Briefcase,
-  Wrench,
   Scale,
   ClipboardCheck,
-  Leaf,
   ArrowLeft,
-  MessageCircle
+  MessageCircle,
+  Users,
+  Calculator,
+  PieChart,
+  Shield,
+  Building,
+  Handshake
 } from 'lucide-react';
 
 const servicesData = [
   {
-    id: 'mantenimiento-general',
-    icon: Wrench,
-    title: "Mantenimiento General",
-    description: "Conservación óptima de instalaciones y áreas comunes.",
-    features: [
-      "Construcción, Reparación y/o mantenimiento",
-      "Plomería, Electricidad, Carpintería, Pintura",
-      "Impermeabilización",
-      "Reparaciones mecánicas, eléctricas e hidráulicas",
-      "Acondicionamiento de casas y oficinas",
-      "Limpieza de áreas comunes y salones",
-      "Diagnóstico de Prevención"
-    ],
-    details: "En Go For Work ofrecemos un servicio de mantenimiento general integral para asegurar que todas las instalaciones de su condominio o empresa funcionen a la perfección. Nuestro equipo de profesionales está capacitado para atender desde reparaciones menores hasta proyectos de construcción y remodelación. Realizamos diagnósticos preventivos para evitar problemas futuros y garantizar la seguridad y confort de todos los residentes o usuarios."
-  },
-  {
     id: 'soluciones-contables-juridicas',
     icon: Scale,
     title: "Soluciones Contables y Jurídicas",
-    description: "Transparencia financiera y respaldo legal para su condominio.",
+    description: "Transparencia financiera y respaldo legal para sus activos.",
     features: [
       "Recaudación y Cobranza",
       "Contabilidad e Informes Financieros",
       "Bitácora de obligaciones fiscales",
-      "Asesoría en demandas condominales",
-      "Asesoría para registro como Asociación Civil",
+      "Asesoría legal corporativa",
       "Conciliaciones bancarias"
     ],
-    details: "La salud financiera y legal de su condominio es nuestra prioridad. Brindamos servicios contables transparentes, asegurando una recaudación eficiente y reportes claros para todos los condóminos. Además, nuestro equipo jurídico ofrece asesoría especializada en la resolución de conflictos vecinales, morosidad y cumplimiento de reglamentos internos, protegiendo siempre los intereses de la comunidad."
+    details: "La salud financiera y legal de sus activos es nuestra prioridad. Brindamos servicios contables transparentes, asegurando una recaudación eficiente y reportes claros. Además, nuestro equipo jurídico ofrece asesoría especializada protegiendo siempre los intereses de su empresa o propiedad."
   },
   {
     id: 'operacion-gestion-control',
@@ -61,42 +46,21 @@ const servicesData = [
     description: "Supervisión profesional para garantizar la eficiencia operativa.",
     features: [
       "Supervisión constante a la infraestructura",
-      "Elaboración y control del programa de mantenimiento",
+      "Elaboración y control de programas operativos",
       "Gestión de contratación y pago a proveedores",
-      "Personal de ingeniería y supervisión operativa",
-      "Monitoreo constante de activos y áreas comunes",
+      "Monitoreo constante de activos",
       "Supervisión y control de personal"
     ],
-    details: "Nos encargamos de la administración operativa diaria de su propiedad. Desde la supervisión del personal y proveedores hasta el monitoreo constante de las instalaciones, garantizamos que todo opere de manera fluida y eficiente. Implementamos programas de mantenimiento estructurados y llevamos un control riguroso de los recursos para optimizar los costos y mejorar la calidad del servicio."
-  },
-  {
-    id: 'jardineria-areas-verdes',
-    icon: Leaf,
-    title: "Jardinería y Áreas Verdes",
-    description: "Cuidado y diseño de espacios naturales.",
-    features: [
-      "Jardinería general",
-      "Servicio eventual o permanente",
-      "Paisajismo",
-      "Mantenimiento de áreas recreativas"
-    ],
-    details: "Las áreas verdes son el pulmón y la carta de presentación de cualquier condominio. Nuestro servicio de jardinería abarca desde el mantenimiento rutinario hasta proyectos de paisajismo que embellecen y revalorizan su propiedad. Contamos con personal capacitado para el cuidado de plantas, césped y áreas recreativas, asegurando espacios limpios, seguros y agradables para el disfrute de todos."
-  },
-  {
-    id: 'servicios-complementarios',
-    icon: ShieldCheck,
-    title: "Servicios Complementarios",
-    description: "Todo lo que su condominio necesita en un solo lugar.",
-    features: [
-      "Recolección de Basura (Doméstica y jardinería)",
-      "Servicio de control de acceso (Portero)",
-      "Fumigación (Control de plagas)",
-      "Limpieza y Mantenimiento de albercas",
-      "Limpieza de Cisternas y Tinacos",
-      "Mudanzas y Limpieza general"
-    ],
-    details: "Para ofrecer una solución verdaderamente integral, contamos con una amplia gama de servicios complementarios. Desde el control de accesos para garantizar la seguridad, hasta la limpieza especializada de albercas y cisternas. Nos adaptamos a las necesidades específicas de su condominio, proporcionando personal de confianza y equipos adecuados para cada tarea, asegurando un entorno limpio, seguro y confortable."
+    details: "Nos encargamos de la administración operativa diaria de su propiedad o empresa. Desde la supervisión del personal y proveedores hasta el monitoreo constante de las instalaciones, garantizamos que todo opere de manera fluida y eficiente. Implementamos programas estructurados y llevamos un control riguroso de los recursos para optimizar los costos."
   }
+];
+
+const specializedServices = [
+  { id: 'gestion-talento', icon: Users, title: 'Gestión de talento', desc: 'Atracción, retención y desarrollo del mejor capital humano para su empresa.' },
+  { id: 'manejo-nomina', icon: Calculator, title: 'Manejo de nómina', desc: 'Administración precisa y puntual de las obligaciones laborales y salariales.' },
+  { id: 'contabilidad', icon: PieChart, title: 'Contabilidad', desc: 'Control financiero riguroso para la toma de decisiones estratégicas.' },
+  { id: 'registro-marcas', icon: Shield, title: 'Registro de marcas', desc: 'Protección legal y resguardo de la identidad y propiedad intelectual de su negocio.' },
+  { id: 'administracion-inmuebles', icon: Building, title: 'Administración de inmuebles', desc: 'Gestión integral para maximizar el valor y la rentabilidad de sus propiedades.' },
 ];
 
 const heroImages = [
@@ -309,13 +273,13 @@ const Home = () => {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light border border-brand-green/20 text-brand-green text-xs font-bold uppercase tracking-wider mb-6">
                 <ShieldCheck size={14} />
-                Servicio Integral a Condominios
+                Servicio Integral de Administración de Activos
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark leading-[1.1] mb-6">
                 Nos encargamos de todo.
               </h1>
               <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-                Para que solo te ocupes de lo más importante <span className="font-bold text-brand-green">"Disfrutar"</span>.
+                Optimizamos la gestión de sus recursos para que usted se enfoque en la <span className="font-bold text-brand-green">rentabilidad y crecimiento</span> de su negocio.
               </p>
               <div className="flex flex-wrap gap-4">
                 <button 
@@ -335,7 +299,7 @@ const Home = () => {
               <div className="mt-12 flex items-center gap-8 border-t border-slate-100 pt-8">
                 <div>
                   <div className="text-2xl font-bold text-brand-dark">100%</div>
-                  <div className="text-sm text-slate-500">Mantenimiento Integral</div>
+                  <div className="text-sm text-slate-500">Gestión Profesional</div>
                 </div>
                 <div className="w-px h-8 bg-slate-200" />
                 <div>
@@ -374,7 +338,7 @@ const Home = () => {
                     </div>
                     <div>
                       <div className="text-brand-dark font-bold leading-tight mb-1">Residencial, Comercial e Industrial</div>
-                      <div className="text-slate-600 text-sm font-medium">Mejoramos la calidad de vida.</div>
+                      <div className="text-slate-600 text-sm font-medium">Maximizamos el valor de sus activos.</div>
                     </div>
                   </div>
                 </div>
@@ -425,9 +389,9 @@ const Home = () => {
               className="order-1 lg:order-2"
             >
               <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">En Go For Work</h2>
-              <h3 className="text-4xl font-bold text-brand-dark mb-6">Especialistas en la administración de condominios y fraccionamiento</h3>
+              <h3 className="text-4xl font-bold text-brand-dark mb-6">Especialistas en la administración de activos</h3>
               <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                Aprovechamos al máximo los recursos del lugar con el fin de mejorar la calidad de vida de los condominios.
+                Aprovechamos al máximo los recursos con el fin de mejorar la rentabilidad y el valor de sus propiedades y negocios.
               </p>
               
               <div className="space-y-6">
@@ -437,16 +401,16 @@ const Home = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-brand-dark mb-1">Aumento de Plusvalía</h4>
-                    <p className="text-slate-500">Cuidamos su propiedad con el fin de mantener y aumentar la plusvalía de los condominios.</p>
+                    <p className="text-slate-500">Cuidamos su propiedad con el fin de mantener y aumentar el valor de sus activos.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <div className="w-12 h-12 shrink-0 bg-brand-light rounded-full flex items-center justify-center text-brand-green">
-                    <Wrench size={24} />
+                    <ClipboardCheck size={24} />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-brand-dark mb-1">Mantenimiento Integral</h4>
-                    <p className="text-slate-500">Ofrecemos mantenimiento integral de las instalaciones.</p>
+                    <h4 className="text-lg font-bold text-brand-dark mb-1">Gestión Integral</h4>
+                    <p className="text-slate-500">Ofrecemos administración y control operativo de primer nivel.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -477,11 +441,11 @@ const Home = () => {
             <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Nos Encargamos De</h2>
             <h3 className="text-4xl font-bold text-brand-dark mb-6">Nuestros Servicios</h3>
             <p className="text-slate-600 text-lg">
-              Soluciones integrales para el correcto funcionamiento y conservación de su propiedad.
+              Soluciones integrales para el correcto funcionamiento y conservación de sus activos.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {servicesData.map((service, index) => (
               <ServiceCard key={service.id} index={index} {...service} />
             ))}
@@ -489,9 +453,87 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Specialized Services Section */}
+      <section id="especializados" className="section-padding bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Soluciones a la medida</h2>
+            <h3 className="text-4xl font-bold text-brand-dark mb-6">Servicios Especializados</h3>
+            <p className="text-slate-600 text-lg">
+              Experiencia y profesionalismo en áreas clave para el desarrollo y protección de su empresa.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {specializedServices.map((srv, idx) => (
+              <motion.div 
+                key={srv.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-brand-green/20 transition-all text-center group"
+              >
+                <div className="w-14 h-14 mx-auto bg-brand-light rounded-xl flex items-center justify-center mb-5 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-colors">
+                  <srv.icon size={28} />
+                </div>
+                <h4 className="font-bold text-brand-dark mb-3 leading-tight">{srv.title}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed">{srv.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CRG Synergy Section */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="bg-brand-dark rounded-3xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12"
+          >
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-green/10 skew-x-12 translate-x-1/4" />
+            
+            <div className="relative z-10 md:w-2/3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-brand-light text-xs font-bold uppercase tracking-wider mb-6">
+                <Handshake size={14} />
+                Alianza Estratégica
+              </div>
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Sinergia con CRG Seguros y Fianzas</h3>
+              <p className="text-brand-light/80 text-lg mb-8 max-w-2xl leading-relaxed">
+                Trabajamos en conjunto con CRG para brindar un respaldo sólido y protección integral a sus activos. Aseguramos la tranquilidad de sus operaciones con soluciones a la medida.
+              </p>
+              <a 
+                href="https://crg.com.mx/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-green text-white rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition-all shadow-lg"
+              >
+                Conocer más sobre CRG <ArrowRight size={20} />
+              </a>
+            </div>
+            
+            <div className="relative z-10 md:w-1/3 flex justify-center">
+               <div className="w-40 h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm">
+                  <Shield size={72} className="text-brand-green" />
+               </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="section-padding bg-brand-dark text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-green/10 skew-x-12 translate-x-1/4" />
+      <section className="section-padding bg-brand-green text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-dark/10 skew-x-12 translate-x-1/4" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -500,21 +542,21 @@ const Home = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-bold mb-6">¿Listo para mejorar la calidad de vida en su condominio?</h2>
-              <p className="text-brand-light/80 text-lg mb-8">
-                Contáctenos hoy mismo y descubra cómo podemos ayudarle a mantener y aumentar la plusvalía de su propiedad.
+              <h2 className="text-4xl font-bold mb-6">¿Listo para maximizar el valor de sus activos?</h2>
+              <p className="text-white/90 text-lg mb-8">
+                Contáctenos hoy mismo y descubra cómo podemos ayudarle a optimizar la gestión y rentabilidad de su propiedad o negocio.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a 
                   href="https://wa.me/529996490236?text=Hola,%20me%20gustaría%20recibir%20más%20información%20sobre%20sus%20servicios." 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 bg-brand-green text-white rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition-all inline-flex items-center gap-2"
+                  className="px-8 py-4 bg-brand-dark text-white rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition-all inline-flex items-center gap-2 shadow-xl"
                 >
                   <MessageCircle size={20} /> Contactar por WhatsApp
                 </a>
-                <div className="flex items-center gap-4 text-brand-light">
-                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center">
+                <div className="flex items-center gap-4 text-white">
+                  <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center">
                     <Phone size={18} />
                   </div>
                   <span className="font-medium">999 649 0236</span>
@@ -580,46 +622,23 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               className="lg:col-span-2"
             >
-              <form className="bg-white p-8 md:p-10 rounded-3xl border border-slate-100 shadow-xl space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-700">Nombre completo</label>
-                    <input 
-                      type="text" 
-                      placeholder="Ej. Juan Pérez"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-700">Correo electrónico</label>
-                    <input 
-                      type="email" 
-                      placeholder="juan@empresa.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700">Servicio de interés</label>
-                  <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 outline-none transition-all appearance-none bg-white">
-                    <option>Mantenimiento General</option>
-                    <option>Soluciones Contables y Jurídicas</option>
-                    <option>Operación, Gestión y Control</option>
-                    <option>Servicios Complementarios</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700">Mensaje</label>
-                  <textarea 
-                    rows={4}
-                    placeholder="Cuéntenos brevemente sobre sus necesidades..."
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 outline-none transition-all resize-none"
-                  ></textarea>
-                </div>
-                <button className="w-full py-4 bg-brand-green text-white rounded-xl font-bold text-lg hover:bg-brand-dark transition-all shadow-lg shadow-brand-green/20">
-                  Enviar Mensaje
-                </button>
-              </form>
+              <div className="bg-white p-2 md:p-4 rounded-3xl border border-slate-100 shadow-xl h-[600px] overflow-hidden">
+                {/* 
+                  =======================================================================
+                  CAMBIAR ENLACE DE BOOKINGS AQUÍ
+                  =======================================================================
+                  Para poner el enlace definitivo en el futuro, simplemente reemplaza 
+                  la URL que está dentro del atributo 'src' del iframe de abajo.
+                */}
+                <iframe
+                  src="https://outlook.office.com/bookwithme/user/d60d482122d6426d8e38f7285ba9b2a7@corp-mx.com?anonymous&ep=plink"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  title="Agendar cita"
+                ></iframe>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -728,7 +747,7 @@ const Footer = () => {
             )}
           </div>
           <p className="text-slate-500 max-w-sm mb-8">
-            Servicio Integral a Condominios. Nos encargamos de todo para que solo te ocupes de lo más importante "Disfrutar".
+            Servicio Integral de Administración de Activos. Optimizamos la gestión de sus recursos para garantizar la máxima rentabilidad y seguridad.
           </p>
         </div>
         
