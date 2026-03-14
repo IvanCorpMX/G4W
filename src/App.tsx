@@ -351,6 +351,31 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Services Section */}
+      <section id="servicios" className="section-padding">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Nos Encargamos De</h2>
+            <h3 className="text-4xl font-bold text-brand-dark mb-6">Nuestros Servicios</h3>
+            <p className="text-slate-600 text-lg">
+              Soluciones integrales para el correcto funcionamiento y conservación de sus activos.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {servicesData.map((service, index) => (
+              <ServiceCard key={service.id} index={index} {...service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="nosotros" className="section-padding overflow-hidden bg-slate-50">
         <div className="max-w-7xl mx-auto">
@@ -424,31 +449,6 @@ const Home = () => {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="servicios" className="section-padding">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Nos Encargamos De</h2>
-            <h3 className="text-4xl font-bold text-brand-dark mb-6">Nuestros Servicios</h3>
-            <p className="text-slate-600 text-lg">
-              Soluciones integrales para el correcto funcionamiento y conservación de sus activos.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {servicesData.map((service, index) => (
-              <ServiceCard key={service.id} index={index} {...service} />
-            ))}
           </div>
         </div>
       </section>
@@ -775,9 +775,86 @@ const Footer = () => {
         <p className="text-slate-400 text-sm">
           © {new Date().getFullYear()} G4W Go For Work México. Todos los derechos reservados.
         </p>
+        <Link to="/privacidad" className="text-slate-400 hover:text-brand-green text-sm transition-colors">
+          Aviso de Privacidad
+        </Link>
       </div>
     </div>
   </footer>
+  );
+};
+
+const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen pt-32 pb-20 bg-slate-50"
+    >
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100">
+          <h1 className="text-3xl font-bold text-brand-dark mb-6">Aviso de Privacidad</h1>
+          <div className="prose prose-slate max-w-none text-slate-600">
+            <p className="text-sm text-slate-500 mb-8">Última actualización: 14/03/2026</p>
+            <p>G4W Consultores, dedicada a la administración de fraccionamientos y reclutamiento de personal es responsable del tratamiento de los datos personales que recaba.</p>
+            
+            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Datos personales recabados</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Nombre completo</li>
+              <li>Teléfono</li>
+              <li>Correo electrónico</li>
+              <li>Dirección</li>
+              <li>Información laboral o curricular</li>
+              <li>Información necesaria para procesos de reclutamiento o administración</li>
+            </ul>
+
+            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Finalidades</h3>
+            
+            <h4 className="font-bold text-brand-dark mt-6 mb-2">Primarias</h4>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Procesos de reclutamiento y selección de personal</li>
+              <li>Administración de fraccionamientos</li>
+              <li>Atención a solicitudes de servicio o asesoría</li>
+              <li>Comunicación con clientes o candidatos</li>
+            </ul>
+
+            <h4 className="font-bold text-brand-dark mt-6 mb-2">Secundarias</h4>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Base de datos para futuras oportunidades laborales</li>
+              <li>Envío de información sobre servicios de consultoría</li>
+            </ul>
+
+            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Transferencia de datos</h3>
+            <p>Los datos podrán compartirse con clientes que participen en procesos de reclutamiento o con empresas del grupo CORP-MX cuando sea necesario para la prestación de servicios.</p>
+
+            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Derechos ARCO</h3>
+            <p>Podrá ejercerlos enviando una solicitud a:<br/><a href="mailto:ventas@g4w.mx" className="text-brand-green font-medium hover:underline">ventas@g4w.mx</a></p>
+
+            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Cambios al aviso</h3>
+            <p>Las modificaciones se publicarán en el sitio web oficial.</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const FloatingWhatsApp = () => {
+  return (
+    <a
+      href="https://wa.me/5219933991483?text=Hola,%20me%20gustaría%20recibir%20más%20información."
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300"
+      aria-label="Contactar por WhatsApp"
+    >
+      <MessageCircle size={28} />
+    </a>
   );
 };
 
@@ -791,9 +868,11 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/servicio/:id" element={<ServiceDetail />} />
+            <Route path="/privacidad" element={<PrivacyPolicy />} />
           </Routes>
         </main>
         <Footer />
+        <FloatingWhatsApp />
       </div>
     </BrowserRouter>
   );
