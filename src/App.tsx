@@ -762,22 +762,27 @@ const Footer = () => {
         </div>
         
         <div>
-          <h4 className="font-bold text-brand-dark mb-6">Enlaces Rápidos</h4>
-          <ul className="space-y-4">
-            <li><Link to="/" className="text-slate-500 hover:text-brand-green transition-colors">Inicio</Link></li>
-            <li><Link to="/#nosotros" className="text-slate-500 hover:text-brand-green transition-colors">Nosotros</Link></li>
-            <li><Link to="/#servicios" className="text-slate-500 hover:text-brand-green transition-colors">Servicios</Link></li>
-            <li><Link to="/#contacto" className="text-slate-500 hover:text-brand-green transition-colors">Contacto</Link></li>
-          </ul>
-        </div>
-
-        <div>
           <h4 className="font-bold text-brand-dark mb-6">Síguenos</h4>
           <ul className="space-y-4">
             <li><a href="https://www.facebook.com/g4wconsultores" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-brand-green transition-colors">Facebook</a></li>
             <li><a href="https://www.instagram.com/g4wconsultores/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-brand-green transition-colors">Instagram</a></li>
             <li><a href="https://www.linkedin.com/company/g4wconsultores/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-brand-green transition-colors">LinkedIn</a></li>
           </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-brand-dark mb-6">Certificaciones</h4>
+          <div className="flex flex-col gap-4">
+            <p className="text-slate-500 text-sm">
+              Empresa certificada bajo la norma ISO/IEC 27001 para la gestión de la seguridad de la información.
+            </p>
+            <img 
+              src="/iso27001.png" 
+              alt="Certificación ISO 27001" 
+              className="h-24 w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </div>
         </div>
       </div>
       
