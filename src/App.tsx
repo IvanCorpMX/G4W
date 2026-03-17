@@ -731,6 +731,7 @@ const ServiceDetail = () => {
 
 const Footer = () => {
   const [logoError, setLogoError] = useState(false);
+  const [certLogoError, setCertLogoError] = useState(false);
   
   return (
   <footer className="bg-slate-50 border-t border-slate-200 pt-20 pb-10">
@@ -772,16 +773,25 @@ const Footer = () => {
 
         <div>
           <h4 className="font-bold text-brand-dark mb-6">Certificaciones</h4>
-          <div className="flex flex-col gap-4">
-            <p className="text-slate-500 text-sm">
-              Empresa certificada bajo la norma ISO/IEC 27001 para la gestión de la seguridad de la información.
-            </p>
-            <img 
-              src="/iso27001.png" 
-              alt="Certificación ISO 27001" 
-              className="h-24 w-auto object-contain"
-              referrerPolicy="no-referrer"
-            />
+          <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4 overflow-hidden">
+            {!certLogoError ? (
+              <img 
+                src="/iso27001.png" 
+                alt="Certificación ISO 27001" 
+                className="h-12 w-auto object-contain shrink-0"
+                referrerPolicy="no-referrer"
+                onError={() => setCertLogoError(true)}
+              />
+            ) : (
+              <div className="h-12 w-12 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-6 h-6 text-brand-green" />
+              </div>
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="text-slate-600 text-xs leading-relaxed break-words">
+                Empresa certificada bajo la norma <strong className="text-brand-dark font-semibold">ISO/IEC 27001</strong> para la gestión de la seguridad de la información.
+              </p>
+            </div>
           </div>
         </div>
       </div>
