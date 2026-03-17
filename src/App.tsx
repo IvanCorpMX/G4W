@@ -247,6 +247,7 @@ const ServiceCard = ({ id, icon: Icon, title, description, features, index = 0 }
 
 const Home = () => {
   const [currentImg, setCurrentImg] = useState(0);
+  const [crgLogoError, setCrgLogoError] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -523,8 +524,17 @@ const Home = () => {
             </div>
             
             <div className="relative z-10 md:w-1/3 flex justify-center">
-               <div className="w-40 h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm">
-                  <Shield size={72} className="text-brand-green" />
+               <div className="w-40 h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm overflow-hidden p-4">
+                  {!crgLogoError ? (
+                    <img 
+                      src="/crg-logo.png" 
+                      alt="CRG Seguros y Fianzas" 
+                      className="w-full h-full object-contain"
+                      onError={() => setCrgLogoError(true)}
+                    />
+                  ) : (
+                    <Shield size={72} className="text-brand-green" />
+                  )}
                </div>
             </div>
           </motion.div>
