@@ -646,6 +646,7 @@ const Home = () => {
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
+                  loading="lazy"
                   title="Agendar cita"
                 ></iframe>
               </div>
