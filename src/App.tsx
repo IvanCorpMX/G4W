@@ -774,21 +774,21 @@ const Footer = () => {
 
         <div>
           <h4 className="font-bold text-brand-dark mb-6">Certificaciones</h4>
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4 overflow-hidden">
+          <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col items-start gap-3 overflow-hidden">
             {!certLogoError ? (
               <img 
                 src="/iso27001.png" 
                 alt="Certificación ISO 27001" 
-                className="h-12 w-28 object-contain shrink-0"
+                className="h-16 w-auto object-contain"
                 referrerPolicy="no-referrer"
                 onError={() => setCertLogoError(true)}
               />
             ) : (
-              <div className="h-12 w-28 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6 text-brand-green" />
+              <div className="h-16 w-40 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center">
+                <ShieldCheck className="w-8 h-8 text-brand-green" />
               </div>
             )}
-            <div className="flex-1 min-w-0">
+            <div className="w-full">
               <p className="text-slate-600 text-xs leading-relaxed break-words">
                 Empresa certificada bajo la norma <strong className="text-brand-dark font-semibold">ISO/IEC 27001</strong> para la gestión de la seguridad de la información.
               </p>
