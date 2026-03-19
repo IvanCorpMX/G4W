@@ -779,12 +779,12 @@ const Footer = () => {
               <img 
                 src="/iso27001.png" 
                 alt="Certificación ISO 27001" 
-                className="h-12 w-auto object-contain shrink-0"
+                className="h-12 w-28 object-contain shrink-0"
                 referrerPolicy="no-referrer"
                 onError={() => setCertLogoError(true)}
               />
             ) : (
-              <div className="h-12 w-12 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center shrink-0">
+              <div className="h-12 w-28 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center shrink-0">
                 <ShieldCheck className="w-6 h-6 text-brand-green" />
               </div>
             )}
