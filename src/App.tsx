@@ -258,13 +258,12 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <section id="inicio" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      {/* 1. Gestion Empresarial (New Hero) */}
+      <section id="inicio" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-green/10 blur-[120px] rounded-full" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-green/5 blur-[120px] rounded-full" />
         </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -273,14 +272,14 @@ const Home = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light border border-brand-green/20 text-brand-green text-xs font-bold uppercase tracking-wider mb-6">
-                <ShieldCheck size={14} />
-                Servicio Integral de Administración de Activos
+                <Building2 size={14} />
+                Soluciones Estratégicas
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold text-brand-dark leading-[1.1] mb-6">
-                Nos encargamos de todo.
+                Gestión Empresarial
               </h1>
               <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-                Optimizamos la gestión de sus recursos para que usted se enfoque en la <span className="font-bold text-brand-green">rentabilidad y crecimiento</span> de su negocio.
+                Nosotros nos encargamos de la <span className="font-bold text-brand-green">gestión empresarial</span> de su negocio. Optimizamos sus recursos, procesos y talento para que usted pueda enfocarse en el crecimiento y la rentabilidad.
               </p>
               <div className="flex flex-wrap gap-4">
                 <button 
@@ -296,18 +295,6 @@ const Home = () => {
                   Ver servicios
                 </button>
               </div>
-              
-              <div className="mt-12 flex items-center gap-8 border-t border-slate-100 pt-8">
-                <div>
-                  <div className="text-2xl font-bold text-brand-dark">100%</div>
-                  <div className="text-sm text-slate-500">Gestión Profesional</div>
-                </div>
-                <div className="w-px h-8 bg-slate-200" />
-                <div>
-                  <div className="text-2xl font-bold text-brand-dark">24/7</div>
-                  <div className="text-sm text-slate-500">Supervisión Operativa</div>
-                </div>
-              </div>
             </motion.div>
 
             <motion.div
@@ -316,33 +303,15 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white aspect-[4/5]">
-                <AnimatePresence>
-                  <motion.img 
-                    key={currentImg}
-                    src={heroImages[currentImg].src}
-                    onError={(e) => { e.currentTarget.src = heroImages[currentImg].fallback; }}
-                    alt="Gestión Profesional" 
-                    className="absolute inset-0 w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1 }}
-                  />
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent z-10" />
-                <div className="absolute bottom-8 left-8 right-8 p-6 glass-card rounded-2xl z-20">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-brand-green rounded-full flex items-center justify-center text-white shrink-0">
-                      <Building2 size={24} />
-                    </div>
-                    <div>
-                      <div className="text-brand-dark font-bold leading-tight mb-1">Residencial, Comercial e Industrial</div>
-                      <div className="text-slate-600 text-sm font-medium">Maximizamos el valor de sus activos.</div>
-                    </div>
-                  </div>
-                </div>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white aspect-[4/3]">
+                <img 
+                  src="/gestion-empresarial.webp"
+                  onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/business/800/600"; }}
+                  alt="Gestión Empresarial" 
+                  className="absolute inset-0 w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 via-transparent to-transparent z-10" />
               </div>
               {/* Decorative elements */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand-green/10 rounded-full blur-2xl" />
@@ -352,7 +321,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* 2. Nuestros Servicios */}
       <section id="servicios" className="section-padding">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -362,7 +331,6 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Nos Encargamos De</h2>
             <h3 className="text-4xl font-bold text-brand-dark mb-6">Nuestros Servicios</h3>
             <p className="text-slate-600 text-lg">
               Soluciones integrales para el correcto funcionamiento y conservación de sus activos.
@@ -377,7 +345,94 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* 3. Servicios Especializados */}
+      <section id="especializados" className="section-padding bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Soluciones a la medida</h2>
+            <h3 className="text-4xl font-bold text-brand-dark mb-6">Servicios Especializados</h3>
+            <p className="text-slate-600 text-lg">
+              Experiencia y profesionalismo en áreas clave para el desarrollo y protección de su empresa.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {specializedServices.map((srv, idx) => (
+              <motion.div 
+                key={srv.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-brand-green/20 transition-all text-center group"
+              >
+                <div className="w-14 h-14 mx-auto bg-brand-light rounded-xl flex items-center justify-center mb-5 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-colors">
+                  <srv.icon size={28} />
+                </div>
+                <h4 className="font-bold text-brand-dark mb-3 leading-tight">{srv.title}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed">{srv.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Sinergias */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="bg-brand-dark rounded-3xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12"
+          >
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-green/10 skew-x-12 translate-x-1/4" />
+            
+            <div className="relative z-10 md:w-2/3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-brand-light text-xs font-bold uppercase tracking-wider mb-6">
+                <Handshake size={14} />
+                Alianza Estratégica
+              </div>
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Sinergia con CRG Seguros y Fianzas</h3>
+              <p className="text-brand-light/80 text-lg mb-8 max-w-2xl leading-relaxed">
+                Trabajamos en conjunto con CRG para brindar un respaldo sólido y protección integral a sus activos. Aseguramos la tranquilidad de sus operaciones con soluciones a la medida.
+              </p>
+              <a 
+                href="https://crg.com.mx/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-green text-white rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition-all shadow-lg"
+              >
+                Conocer más sobre CRG <ArrowRight size={20} />
+              </a>
+            </div>
+            
+            <div className="relative z-10 md:w-1/3 flex justify-center">
+               <div className="w-40 h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm overflow-hidden p-4">
+                  {!crgLogoError ? (
+                    <img 
+                      src="/crg-logo.png" 
+                      alt="CRG Seguros y Fianzas" 
+                      className="w-full h-full object-contain"
+                      onError={() => setCrgLogoError(true)}
+                    />
+                  ) : (
+                    <Shield size={72} className="text-brand-green" />
+                  )}
+               </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 5. Especialistas en la administracion de activos */}
       <section id="nosotros" className="section-padding overflow-hidden bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -454,97 +509,14 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Specialized Services Section */}
-      <section id="especializados" className="section-padding bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Soluciones a la medida</h2>
-            <h3 className="text-4xl font-bold text-brand-dark mb-6">Servicios Especializados</h3>
-            <p className="text-slate-600 text-lg">
-              Experiencia y profesionalismo en áreas clave para el desarrollo y protección de su empresa.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {specializedServices.map((srv, idx) => (
-              <motion.div 
-                key={srv.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-brand-green/20 transition-all text-center group"
-              >
-                <div className="w-14 h-14 mx-auto bg-brand-light rounded-xl flex items-center justify-center mb-5 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-colors">
-                  <srv.icon size={28} />
-                </div>
-                <h4 className="font-bold text-brand-dark mb-3 leading-tight">{srv.title}</h4>
-                <p className="text-sm text-slate-500 leading-relaxed">{srv.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* 6. Nos encargamos de todo (Old Hero) */}
+      <section id="nos-encargamos" className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-green/10 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-green/5 blur-[120px] rounded-full" />
         </div>
-      </section>
 
-      {/* CRG Synergy Section */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="bg-brand-dark rounded-3xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12"
-          >
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-green/10 skew-x-12 translate-x-1/4" />
-            
-            <div className="relative z-10 md:w-2/3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-brand-light text-xs font-bold uppercase tracking-wider mb-6">
-                <Handshake size={14} />
-                Alianza Estratégica
-              </div>
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Sinergia con CRG Seguros y Fianzas</h3>
-              <p className="text-brand-light/80 text-lg mb-8 max-w-2xl leading-relaxed">
-                Trabajamos en conjunto con CRG para brindar un respaldo sólido y protección integral a sus activos. Aseguramos la tranquilidad de sus operaciones con soluciones a la medida.
-              </p>
-              <a 
-                href="https://crg.com.mx/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-green text-white rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition-all shadow-lg"
-              >
-                Conocer más sobre CRG <ArrowRight size={20} />
-              </a>
-            </div>
-            
-            <div className="relative z-10 md:w-1/3 flex justify-center">
-               <div className="w-40 h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm overflow-hidden p-4">
-                  {!crgLogoError ? (
-                    <img 
-                      src="/crg-logo.png" 
-                      alt="CRG Seguros y Fianzas" 
-                      className="w-full h-full object-contain"
-                      onError={() => setCrgLogoError(true)}
-                    />
-                  ) : (
-                    <Shield size={72} className="text-brand-green" />
-                  )}
-               </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-brand-green text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-dark/10 skew-x-12 translate-x-1/4" />
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -552,32 +524,74 @@ const Home = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-bold mb-6">¿Listo para maximizar el valor de sus activos?</h2>
-              <p className="text-white/90 text-lg mb-8">
-                Contáctenos hoy mismo y descubra cómo podemos ayudarle a optimizar la gestión y rentabilidad de su propiedad o negocio.
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light border border-brand-green/20 text-brand-green text-xs font-bold uppercase tracking-wider mb-6">
+                <ShieldCheck size={14} />
+                Servicio Integral de Administración de Activos
+              </div>
+              <h2 className="text-5xl lg:text-7xl font-bold text-brand-dark leading-[1.1] mb-6">
+                Nos encargamos de todo.
+              </h2>
+              <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
+                Optimizamos la gestión de sus recursos para que usted se enfoque en la <span className="font-bold text-brand-green">rentabilidad y crecimiento</span> de su negocio.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <a 
-                  href="https://wa.me/529996490236?text=Hola,%20me%20gustaría%20recibir%20más%20información%20sobre%20sus%20servicios." 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 bg-brand-dark text-white rounded-full font-bold text-lg hover:bg-white hover:text-brand-dark transition-all inline-flex items-center gap-2 shadow-xl"
-                >
-                  <MessageCircle size={20} /> Contactar por WhatsApp
-                </a>
-                <div className="flex items-center gap-4 text-white">
-                  <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center">
-                    <Phone size={18} />
-                  </div>
-                  <span className="font-medium">999 649 0236</span>
+              
+              <div className="mt-12 flex items-center gap-8 border-t border-slate-100 pt-8">
+                <div>
+                  <div className="text-2xl font-bold text-brand-dark">100%</div>
+                  <div className="text-sm text-slate-500">Gestión Profesional</div>
+                </div>
+                <div className="w-px h-8 bg-slate-200" />
+                <div>
+                  <div className="text-2xl font-bold text-brand-dark">24/7</div>
+                  <div className="text-sm text-slate-500">Supervisión Operativa</div>
                 </div>
               </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white aspect-[4/5]">
+                <AnimatePresence>
+                  <motion.img 
+                    key={currentImg}
+                    src={heroImages[currentImg].src}
+                    onError={(e) => { e.currentTarget.src = heroImages[currentImg].fallback; }}
+                    alt="Gestión Profesional" 
+                    className="absolute inset-0 w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent z-10" />
+                <div className="absolute bottom-8 left-8 right-8 p-6 glass-card rounded-2xl z-20">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-brand-green rounded-full flex items-center justify-center text-white shrink-0">
+                      <Building2 size={24} />
+                    </div>
+                    <div>
+                      <div className="text-brand-dark font-bold leading-tight mb-1">Residencial, Comercial e Industrial</div>
+                      <div className="text-slate-600 text-sm font-medium">Maximizamos el valor de sus activos.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand-green/10 rounded-full blur-2xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-green/20 rounded-full blur-3xl" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* 7. Hablemos de su proyecto */}
       <section id="contacto" className="section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-12">
@@ -600,8 +614,8 @@ const Home = () => {
                     <Phone size={20} />
                   </div>
                   <div>
-                    <div className="text-sm text-slate-500 font-medium">Teléfono</div>
-                    <div className="text-brand-dark font-bold">999 649 0236</div>
+                    <div className="text-sm text-slate-500 font-medium">WhatsApp</div>
+                    <div className="text-brand-dark font-bold">+52 1 993 104 4504</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -716,7 +730,7 @@ const ServiceDetail = () => {
 
           <div className="mt-12 text-center">
             <a 
-              href="https://wa.me/529996490236?text=Hola,%20me%20gustaría%20recibir%20más%20información%20sobre%20sus%20servicios." 
+              href="https://wa.me/5219931044504?text=Hola,%20me%20gustaría%20recibir%20más%20información%20sobre%20sus%20servicios." 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-brand-green text-white rounded-full font-bold text-lg hover:bg-brand-dark transition-all shadow-lg shadow-brand-green/20"
@@ -774,18 +788,18 @@ const Footer = () => {
 
         <div>
           <h4 className="font-bold text-brand-dark mb-6">Certificaciones</h4>
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col items-start gap-3 overflow-hidden">
+          <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center gap-4 overflow-hidden">
             {!certLogoError ? (
               <img 
                 src="/iso27001.png" 
                 alt="Certificación ISO 27001" 
-                className="h-16 w-auto object-contain"
+                className="h-24 w-auto object-contain"
                 referrerPolicy="no-referrer"
                 onError={() => setCertLogoError(true)}
               />
             ) : (
-              <div className="h-16 w-40 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center">
-                <ShieldCheck className="w-8 h-8 text-brand-green" />
+              <div className="h-24 w-48 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center">
+                <ShieldCheck className="w-10 h-10 text-brand-green" />
               </div>
             )}
             <div className="w-full">
