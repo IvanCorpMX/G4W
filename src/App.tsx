@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, useParams, useLocation, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Building2, 
@@ -21,7 +21,10 @@ import {
   PieChart,
   Shield,
   Building,
-  Handshake
+  Handshake,
+  Facebook,
+  Instagram,
+  Linkedin
 } from 'lucide-react';
 
 const servicesData = [
@@ -30,6 +33,7 @@ const servicesData = [
     icon: Scale,
     title: "Soluciones Contables y Jurídicas",
     description: "Transparencia financiera y respaldo legal para sus activos.",
+    image: "/about-1.webp",
     features: [
       "Recaudación y Cobranza",
       "Contabilidad e Informes Financieros",
@@ -44,6 +48,7 @@ const servicesData = [
     icon: ClipboardCheck,
     title: "Operación, Gestión y Control",
     description: "Supervisión profesional para garantizar la eficiencia operativa.",
+    image: "/about-2.webp",
     features: [
       "Supervisión constante a la infraestructura",
       "Elaboración y control de programas operativos",
@@ -208,7 +213,7 @@ const Navbar = () => {
   );
 };
 
-const ServiceCard = ({ id, icon: Icon, title, description, features, index = 0 }: any) => (
+const ServiceCard = ({ id, icon: Icon, title, description, features, image, index = 0 }: any) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -219,28 +224,48 @@ const ServiceCard = ({ id, icon: Icon, title, description, features, index = 0 }
     <Link to={`/servicio/${id}`} className="block h-full">
       <motion.div 
         whileHover={{ y: -5 }}
-        className="h-full p-8 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-green/20 transition-all group flex flex-col relative overflow-hidden"
+        className="h-full rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-green/20 transition-all group flex flex-col relative overflow-hidden"
       >
-        <div className="w-14 h-14 bg-brand-light rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-green transition-colors">
-          <Icon className="text-brand-green group-hover:text-white transition-colors" size={28} />
-        </div>
-        <h3 className="text-xl font-bold text-brand-dark mb-3">{title}</h3>
-        <p className="text-slate-600 mb-6 leading-relaxed flex-grow">{description}</p>
-        <ul className="space-y-3 mb-8">
-          {features.slice(0, 3).map((feature: string, idx: number) => (
-            <li key={idx} className="flex items-start gap-2 text-sm text-slate-500">
-              <CheckCircle2 size={16} className="text-brand-green mt-0.5 shrink-0" />
-              <span className="line-clamp-1">{feature}</span>
-            </li>
-          ))}
-          {features.length > 3 && (
-            <li className="text-sm text-brand-green font-medium italic">
-              + {features.length - 3} servicios más...
-            </li>
+        {image && (
+          <div className="w-full h-48 overflow-hidden relative">
+            <img 
+              src={image} 
+              alt={title} 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              referrerPolicy="no-referrer"
+              onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/service/800/400"; }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-brand-green transition-colors">
+              <Icon className="text-brand-green group-hover:text-white transition-colors" size={24} />
+            </div>
+          </div>
+        )}
+        
+        <div className="p-8 flex flex-col flex-grow">
+          {!image && (
+            <div className="w-14 h-14 bg-brand-light rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-green transition-colors">
+              <Icon className="text-brand-green group-hover:text-white transition-colors" size={28} />
+            </div>
           )}
-        </ul>
-        <div className="mt-auto flex items-center text-brand-green font-semibold text-sm group-hover:translate-x-2 transition-transform">
-          Ver más información <ArrowRight size={16} className="ml-2" />
+          <h3 className="text-xl font-bold text-brand-dark mb-3">{title}</h3>
+          <p className="text-slate-600 mb-6 leading-relaxed flex-grow">{description}</p>
+          <ul className="space-y-3 mb-8">
+            {features.slice(0, 3).map((feature: string, idx: number) => (
+              <li key={idx} className="flex items-start gap-2 text-sm text-slate-500">
+                <CheckCircle2 size={16} className="text-brand-green mt-0.5 shrink-0" />
+                <span className="line-clamp-1">{feature}</span>
+              </li>
+            ))}
+            {features.length > 3 && (
+              <li className="text-sm text-brand-green font-medium italic">
+                + {features.length - 3} servicios más...
+              </li>
+            )}
+          </ul>
+          <div className="mt-auto flex items-center text-brand-green font-semibold text-sm group-hover:translate-x-2 transition-transform">
+            Ver más información <ArrowRight size={16} className="ml-2" />
+          </div>
         </div>
       </motion.div>
     </Link>
@@ -434,50 +459,34 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 5. Especialistas en la administracion de activos */}
-      <section id="nosotros" className="section-padding overflow-hidden bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
+      {/* 5. Especialistas en la administración de activos (Merged with Nos encargamos de todo) */}
+      <section id="nosotros" className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-slate-50">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-green/10 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-green/5 blur-[120px] rounded-full" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              className="order-2 lg:order-1 relative"
+              className="order-2 lg:order-1"
             >
-              <div className="grid grid-cols-2 gap-4">
-                <img 
-                  src="/about-1.webp" 
-                  onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/house/400/500"; }}
-                  alt="Propiedad" 
-                  className="rounded-2xl shadow-lg mt-8 object-cover aspect-[4/5]"
-                  referrerPolicy="no-referrer"
-                />
-                <img 
-                  src="/about-2.webp" 
-                  onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/maintenance/400/500"; }}
-                  alt="Mantenimiento" 
-                  className="rounded-2xl shadow-lg object-cover aspect-[4/5]"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light border border-brand-green/20 text-brand-green text-xs font-bold uppercase tracking-wider mb-6">
+                <ShieldCheck size={14} />
+                Servicio Integral de Administración de Activos
               </div>
-              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-green/5 rounded-full blur-3xl" />
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="order-1 lg:order-2"
-            >
-              <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">En Go For Work</h2>
-              <h3 className="text-4xl font-bold text-brand-dark mb-6">Especialistas en la administración de activos</h3>
-              <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                Aprovechamos al máximo los recursos con el fin de mejorar la rentabilidad y el valor de sus propiedades y negocios.
+              <h2 className="text-4xl lg:text-6xl font-bold text-brand-dark leading-[1.1] mb-6">
+                Especialistas en la administración de activos. <span className="text-brand-green">Nos encargamos de todo.</span>
+              </h2>
+              <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
+                Aprovechamos al máximo los recursos para mejorar la rentabilidad y el valor de sus propiedades y negocios. Optimizamos la gestión para que usted se enfoque en el crecimiento.
               </p>
               
-              <div className="space-y-6">
+              <div className="space-y-6 mb-12">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 shrink-0 bg-brand-light rounded-full flex items-center justify-center text-brand-green">
                     <BarChart3 size={24} />
@@ -506,38 +515,8 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* 6. Nos encargamos de todo (Old Hero) */}
-      <section id="nos-encargamos" className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-green/10 blur-[120px] rounded-full" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-green/5 blur-[120px] rounded-full" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light border border-brand-green/20 text-brand-green text-xs font-bold uppercase tracking-wider mb-6">
-                <ShieldCheck size={14} />
-                Servicio Integral de Administración de Activos
-              </div>
-              <h2 className="text-5xl lg:text-7xl font-bold text-brand-dark leading-[1.1] mb-6">
-                Nos encargamos de todo.
-              </h2>
-              <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-                Optimizamos la gestión de sus recursos para que usted se enfoque en la <span className="font-bold text-brand-green">rentabilidad y crecimiento</span> de su negocio.
-              </p>
-              
-              <div className="mt-12 flex items-center gap-8 border-t border-slate-100 pt-8">
+              <div className="flex items-center gap-8 border-t border-slate-200 pt-8">
                 <div>
                   <div className="text-2xl font-bold text-brand-dark">100%</div>
                   <div className="text-sm text-slate-500">Gestión Profesional</div>
@@ -555,7 +534,7 @@ const Home = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
+              className="relative order-1 lg:order-2"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white aspect-[4/5]">
                 <AnimatePresence>
@@ -588,6 +567,49 @@ const Home = () => {
               {/* Decorative elements */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand-green/10 rounded-full blur-2xl" />
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-green/20 rounded-full blur-3xl" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Certificaciones */}
+      <section className="section-padding bg-white border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="shrink-0"
+            >
+              <img 
+                src="/iso27001.png" 
+                alt="Certificación ISO 27001" 
+                className="h-32 md:h-40 w-auto object-contain drop-shadow-xl"
+                referrerPolicy="no-referrer"
+                onError={(e) => { 
+                  e.currentTarget.style.display = 'none'; 
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden'); 
+                }}
+              />
+              <div className="hidden h-32 w-32 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center shadow-lg">
+                <ShieldCheck className="w-16 h-16 text-brand-green" />
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="max-w-2xl"
+            >
+              <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Certificaciones</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">Comprometidos con la Seguridad</h3>
+              <p className="text-slate-600 text-lg leading-relaxed">
+                Somos una empresa certificada bajo la norma <strong className="text-brand-dark font-semibold">ISO/IEC 27001</strong> para la gestión de la seguridad de la información. Garantizamos la confidencialidad, integridad y disponibilidad de los datos de nuestros clientes en todos nuestros procesos.
+              </p>
             </motion.div>
           </div>
         </div>
@@ -649,15 +671,8 @@ const Home = () => {
               className="lg:col-span-2"
             >
               <div className="bg-white p-2 md:p-4 rounded-3xl border border-slate-100 shadow-xl h-[600px] overflow-hidden">
-                {/* 
-                  =======================================================================
-                  CAMBIAR ENLACE DE BOOKINGS AQUÍ
-                  =======================================================================
-                  Para poner el enlace definitivo en el futuro, simplemente reemplaza 
-                  la URL que está dentro del atributo 'src' del iframe de abajo.
-                */}
                 <iframe
-                  src="https://outlook.office.com/bookwithme/user/d60d482122d6426d8e38f7285ba9b2a7@corp-mx.com?anonymous&ep=plink"
+                  src="https://outlook.office.com/bookwithme/user/8e5069406600444bbe280597de906d71@corp-mx.com/meetingtype/zowuNjan7UaUvoWwxgjNEg2?anonymous&ismsaljsauthenabled&ep=mcard"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -748,12 +763,11 @@ const ServiceDetail = () => {
 
 const Footer = () => {
   const [logoError, setLogoError] = useState(false);
-  const [certLogoError, setCertLogoError] = useState(false);
   
   return (
   <footer className="bg-slate-50 border-t border-slate-200 pt-20 pb-10">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid md:grid-cols-4 gap-12 mb-16">
+      <div className="grid md:grid-cols-3 gap-12 mb-16">
         <div className="col-span-2">
           <div className="flex items-center gap-2 mb-6">
             {!logoError ? (
@@ -782,34 +796,22 @@ const Footer = () => {
         <div>
           <h4 className="font-bold text-brand-dark mb-6">Síguenos</h4>
           <ul className="space-y-4">
-            <li><a href="https://www.facebook.com/g4wconsultores" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-brand-green transition-colors">Facebook</a></li>
-            <li><a href="https://www.instagram.com/g4wconsultores/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-brand-green transition-colors">Instagram</a></li>
-            <li><a href="https://www.linkedin.com/company/g4wconsultores/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-brand-green transition-colors">LinkedIn</a></li>
+            <li>
+              <a href="https://www.facebook.com/g4wconsultores" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-500 hover:text-brand-green transition-colors">
+                <Facebook size={18} /> Facebook
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/g4wconsultores/" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-500 hover:text-brand-green transition-colors">
+                <Instagram size={18} /> Instagram
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/g4wconsultores/" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-500 hover:text-brand-green transition-colors">
+                <Linkedin size={18} /> LinkedIn
+              </a>
+            </li>
           </ul>
-        </div>
-
-        <div>
-          <h4 className="font-bold text-brand-dark mb-6">Certificaciones</h4>
-          <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center gap-4 overflow-hidden">
-            {!certLogoError ? (
-              <img 
-                src="/iso27001.png" 
-                alt="Certificación ISO 27001" 
-                className="h-24 w-auto object-contain"
-                referrerPolicy="no-referrer"
-                onError={() => setCertLogoError(true)}
-              />
-            ) : (
-              <div className="h-24 w-48 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center">
-                <ShieldCheck className="w-10 h-10 text-brand-green" />
-              </div>
-            )}
-            <div className="w-full">
-              <p className="text-slate-600 text-xs leading-relaxed break-words">
-                Empresa certificada bajo la norma <strong className="text-brand-dark font-semibold">ISO/IEC 27001</strong> para la gestión de la seguridad de la información.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
       
@@ -911,6 +913,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/servicio/:id" element={<ServiceDetail />} />
             <Route path="/privacidad" element={<PrivacyPolicy />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         <Footer />
