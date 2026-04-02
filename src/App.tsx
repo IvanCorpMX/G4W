@@ -224,25 +224,25 @@ const ServiceCard = ({ id, icon: Icon, title, description, features, image, inde
     <Link to={`/servicio/${id}`} className="block h-full">
       <motion.div 
         whileHover={{ y: -5 }}
-        className="h-full rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-green/20 transition-all group flex flex-col relative overflow-hidden"
+        className="h-full rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-green/20 transition-all group flex flex-col md:flex-row relative overflow-hidden"
       >
         {image && (
-          <div className="w-full h-48 overflow-hidden relative">
+          <div className="w-full md:w-2/5 relative overflow-hidden shrink-0 aspect-[4/5] md:aspect-auto">
             <img 
               src={image} 
               alt={title} 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               referrerPolicy="no-referrer"
-              onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/service/800/400"; }}
+              onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/service/400/500"; }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-brand-green transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:bg-gradient-to-r md:from-black/30 md:to-transparent" />
+            <div className="absolute bottom-4 left-4 md:top-4 md:bottom-auto w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-brand-green transition-colors">
               <Icon className="text-brand-green group-hover:text-white transition-colors" size={24} />
             </div>
           </div>
         )}
         
-        <div className="p-8 flex flex-col flex-grow">
+        <div className="p-8 flex flex-col flex-grow md:w-3/5">
           {!image && (
             <div className="w-14 h-14 bg-brand-light rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-green transition-colors">
               <Icon className="text-brand-green group-hover:text-white transition-colors" size={28} />
@@ -364,7 +364,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
             {servicesData.map((service, index) => (
               <ServiceCard key={service.id} index={index} {...service} />
             ))}
@@ -593,7 +593,7 @@ const Home = () => {
                   e.currentTarget.nextElementSibling?.classList.remove('hidden'); 
                 }}
               />
-              <div className="hidden h-32 w-32 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="hidden h-32 w-64 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center shadow-lg">
                 <ShieldCheck className="w-16 h-16 text-brand-green" />
               </div>
             </motion.div>
