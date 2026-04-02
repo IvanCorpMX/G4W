@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Building2, 
@@ -101,13 +101,15 @@ const Navbar = () => {
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('/#') && window.location.pathname === '/') {
+    const isHomePage = window.location.hash === '' || window.location.hash === '#/' || window.location.hash.startsWith('#/#');
+    if (href.startsWith('/#') && isHomePage) {
       const targetId = href.replace('/#', '');
       const element = document.getElementById(targetId);
       if (element) {
         e.preventDefault();
         element.scrollIntoView({ behavior: 'smooth' });
-        window.history.pushState(null, '', `#${targetId}`);
+        // Update hash to include the section without breaking HashRouter
+        window.history.pushState(null, '', `#/#${targetId}`);
         setIsOpen(false);
       }
     } else {
@@ -655,7 +657,7 @@ const Home = () => {
                   la URL que está dentro del atributo 'src' del iframe de abajo.
                 */}
                 <iframe
-                  src="https://outlook.office.com/bookwithme/user/8e5069406600444bbe280597de906d71%40corp-mx.com/meetingtype/zowuNjan7UaUvoWwxgjNEg2?anonymous&ismsaljsauthenabled"
+                  src="https://outlook.office.com/bookwithme/user/d60d482122d6426d8e38f7285ba9b2a7@corp-mx.com?anonymous&ep=plink"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -900,7 +902,7 @@ const FloatingWhatsApp = () => {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToAnchor />
       <div className="min-h-screen selection:bg-brand-green/20 flex flex-col">
         <Navbar />
@@ -914,6 +916,6 @@ export default function App() {
         <Footer />
         <FloatingWhatsApp />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
