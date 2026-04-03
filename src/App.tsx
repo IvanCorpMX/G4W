@@ -130,7 +130,7 @@ const Navbar = () => {
             {!logoError ? (
               <img 
                 src="/logo.png" 
-                alt="G4W Go For Work" 
+                alt="G4W Consultores - Administración de Activos en Villahermosa" 
                 className="h-10 w-auto"
                 onError={() => setLogoError(true)}
               />
@@ -230,9 +230,10 @@ const ServiceCard = ({ id, icon: Icon, title, description, features, image, inde
           <div className="w-full md:w-2/5 relative overflow-hidden shrink-0 aspect-[4/5] md:aspect-auto">
             <img 
               src={image} 
-              alt={title} 
+              alt={`Servicio de ${title} en Villahermosa`} 
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               referrerPolicy="no-referrer"
+              loading="lazy"
               onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/service/400/500"; }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:bg-gradient-to-r md:from-black/30 md:to-transparent" />
@@ -334,7 +335,7 @@ const Home = () => {
                 <img 
                   src="/gestion-empresarial.webp"
                   onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/business/800/600"; }}
-                  alt="Gestión Empresarial" 
+                  alt="Gestión Empresarial B2B en Villahermosa y Sureste de México" 
                   className="absolute inset-0 w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -358,7 +359,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h3 className="text-4xl font-bold text-brand-dark mb-6">Nuestros Servicios</h3>
+            <h2 className="text-4xl font-bold text-brand-dark mb-6">Nuestros Servicios</h2>
             <p className="text-slate-600 text-lg">
               Soluciones integrales para el correcto funcionamiento y conservación de sus activos.
             </p>
@@ -382,8 +383,8 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Soluciones a la medida</h2>
-            <h3 className="text-4xl font-bold text-brand-dark mb-6">Servicios Especializados</h3>
+            <span className="block text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Soluciones a la medida</span>
+            <h2 className="text-4xl font-bold text-brand-dark mb-6">Servicios Especializados</h2>
             <p className="text-slate-600 text-lg">
               Experiencia y profesionalismo en áreas clave para el desarrollo y protección de su empresa.
             </p>
@@ -402,7 +403,7 @@ const Home = () => {
                 <div className="w-14 h-14 mx-auto bg-brand-light rounded-xl flex items-center justify-center mb-5 text-brand-green group-hover:bg-brand-green group-hover:text-white transition-colors">
                   <srv.icon size={28} />
                 </div>
-                <h4 className="font-bold text-brand-dark mb-3 leading-tight">{srv.title}</h4>
+                <h3 className="font-bold text-brand-dark mb-3 leading-tight">{srv.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{srv.desc}</p>
               </motion.div>
             ))}
@@ -427,7 +428,7 @@ const Home = () => {
                 <Handshake size={14} />
                 Alianza Estratégica
               </div>
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Sinergia con CRG Seguros y Fianzas</h3>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Sinergia con CRG Seguros y Fianzas</h2>
               <p className="text-brand-light/80 text-lg mb-8 max-w-2xl leading-relaxed">
                 Trabajamos en conjunto con CRG para brindar un respaldo sólido y protección integral a sus activos. Aseguramos la tranquilidad de sus operaciones con soluciones a la medida.
               </p>
@@ -446,8 +447,9 @@ const Home = () => {
                   {!crgLogoError ? (
                     <img 
                       src="/crg-logo.png" 
-                      alt="CRG Seguros y Fianzas" 
+                      alt="CRG Seguros y Fianzas - Alianza Estratégica" 
                       className="w-full h-full object-contain"
+                      loading="lazy"
                       onError={() => setCrgLogoError(true)}
                     />
                   ) : (
@@ -492,7 +494,7 @@ const Home = () => {
                     <BarChart3 size={24} />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-brand-dark mb-1">Aumento de Plusvalía</h4>
+                    <h3 className="text-lg font-bold text-brand-dark mb-1">Aumento de Plusvalía</h3>
                     <p className="text-slate-500">Cuidamos su propiedad con el fin de mantener y aumentar el valor de sus activos.</p>
                   </div>
                 </div>
@@ -501,7 +503,7 @@ const Home = () => {
                     <ClipboardCheck size={24} />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-brand-dark mb-1">Gestión Integral</h4>
+                    <h3 className="text-lg font-bold text-brand-dark mb-1">Gestión Integral</h3>
                     <p className="text-slate-500">Ofrecemos administración y control operativo de primer nivel.</p>
                   </div>
                 </div>
@@ -510,7 +512,7 @@ const Home = () => {
                     <Building2 size={24} />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-brand-dark mb-1">Cobertura Total</h4>
+                    <h3 className="text-lg font-bold text-brand-dark mb-1">Cobertura Total</h3>
                     <p className="text-slate-500">Los servicios que prestamos son de tipo residencial, comercial e industrial.</p>
                   </div>
                 </div>
@@ -585,9 +587,10 @@ const Home = () => {
             >
               <img 
                 src="/iso27001.png" 
-                alt="Certificación ISO 27001" 
+                alt="Certificación ISO 27001 - G4W Consultores" 
                 className="h-32 md:h-40 w-auto object-contain drop-shadow-xl"
                 referrerPolicy="no-referrer"
+                loading="lazy"
                 onError={(e) => { 
                   e.currentTarget.style.display = 'none'; 
                   e.currentTarget.nextElementSibling?.classList.remove('hidden'); 
@@ -605,8 +608,8 @@ const Home = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="max-w-2xl"
             >
-              <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Certificaciones</h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">Comprometidos con la Seguridad</h3>
+              <span className="block text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Certificaciones</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">Comprometidos con la Seguridad</h2>
               <p className="text-slate-600 text-lg leading-relaxed">
                 Somos una empresa certificada bajo la norma <strong className="text-brand-dark font-semibold">ISO/IEC 27001</strong> para la gestión de la seguridad de la información. Garantizamos la confidencialidad, integridad y disponibilidad de los datos de nuestros clientes en todos nuestros procesos.
               </p>
@@ -626,8 +629,8 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               className="lg:col-span-1"
             >
-              <h2 className="text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Contacto</h2>
-              <h3 className="text-4xl font-bold text-brand-dark mb-6">Hablemos de su proyecto</h3>
+              <span className="block text-brand-green font-bold text-sm uppercase tracking-[0.2em] mb-4">Contacto</span>
+              <h2 className="text-4xl font-bold text-brand-dark mb-6">Hablemos de su proyecto</h2>
               <p className="text-slate-600 mb-8">
                 Estamos listos para escuchar sus necesidades y proponer una solución a la medida.
               </p>
@@ -696,7 +699,7 @@ const ServiceDetail = () => {
   if (!service) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center pt-20">
-        <h2 className="text-3xl font-bold text-brand-dark mb-4">Servicio no encontrado</h2>
+        <h1 className="text-3xl font-bold text-brand-dark mb-4">Servicio no encontrado</h1>
         <Link to="/" className="text-brand-green hover:underline flex items-center gap-2">
           <ArrowLeft size={20} /> Volver al inicio
         </Link>
@@ -734,7 +737,7 @@ const ServiceDetail = () => {
           </div>
 
           <div className="bg-slate-50 rounded-2xl p-8 border border-slate-100">
-            <h3 className="text-2xl font-bold text-brand-dark mb-6">¿Qué incluye este servicio?</h3>
+            <h2 className="text-2xl font-bold text-brand-dark mb-6">¿Qué incluye este servicio?</h2>
             <ul className="grid md:grid-cols-2 gap-4">
               {service.features.map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-3">
@@ -773,8 +776,9 @@ const Footer = () => {
             {!logoError ? (
               <img 
                 src="/logo.png" 
-                alt="G4W Go For Work" 
+                alt="G4W Consultores Logo Footer" 
                 className="h-12 w-auto"
+                loading="lazy"
                 onError={() => setLogoError(true)}
               />
             ) : (
@@ -794,7 +798,7 @@ const Footer = () => {
         </div>
         
         <div>
-          <h4 className="font-bold text-brand-dark mb-6">Síguenos</h4>
+          <h3 className="font-bold text-brand-dark mb-6">Síguenos</h3>
           <ul className="space-y-4">
             <li>
               <a href="https://www.facebook.com/g4wconsultores" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-500 hover:text-brand-green transition-colors">
@@ -847,7 +851,7 @@ const PrivacyPolicy = () => {
             <p className="text-sm text-slate-500 mb-8">Última actualización: 14/03/2026</p>
             <p>G4W Consultores, dedicada a la administración de fraccionamientos y reclutamiento de personal es responsable del tratamiento de los datos personales que recaba.</p>
             
-            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Datos personales recabados</h3>
+            <h2 className="text-xl font-bold text-brand-dark mt-8 mb-4">Datos personales recabados</h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>Nombre completo</li>
               <li>Teléfono</li>
@@ -857,9 +861,9 @@ const PrivacyPolicy = () => {
               <li>Información necesaria para procesos de reclutamiento o administración</li>
             </ul>
 
-            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Finalidades</h3>
+            <h2 className="text-xl font-bold text-brand-dark mt-8 mb-4">Finalidades</h2>
             
-            <h4 className="font-bold text-brand-dark mt-6 mb-2">Primarias</h4>
+            <h3 className="font-bold text-brand-dark mt-6 mb-2">Primarias</h3>
             <ul className="list-disc pl-5 space-y-2">
               <li>Procesos de reclutamiento y selección de personal</li>
               <li>Administración de fraccionamientos</li>
@@ -867,19 +871,19 @@ const PrivacyPolicy = () => {
               <li>Comunicación con clientes o candidatos</li>
             </ul>
 
-            <h4 className="font-bold text-brand-dark mt-6 mb-2">Secundarias</h4>
+            <h3 className="font-bold text-brand-dark mt-6 mb-2">Secundarias</h3>
             <ul className="list-disc pl-5 space-y-2">
               <li>Base de datos para futuras oportunidades laborales</li>
               <li>Envío de información sobre servicios de consultoría</li>
             </ul>
 
-            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Transferencia de datos</h3>
+            <h2 className="text-xl font-bold text-brand-dark mt-8 mb-4">Transferencia de datos</h2>
             <p>Los datos podrán compartirse con clientes que participen en procesos de reclutamiento o con empresas del grupo CORP-MX cuando sea necesario para la prestación de servicios.</p>
 
-            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Derechos ARCO</h3>
+            <h2 className="text-xl font-bold text-brand-dark mt-8 mb-4">Derechos ARCO</h2>
             <p>Podrá ejercerlos enviando una solicitud a:<br/><a href="mailto:ventas@g4w.mx" className="text-brand-green font-medium hover:underline">ventas@g4w.mx</a></p>
 
-            <h3 className="text-xl font-bold text-brand-dark mt-8 mb-4">Cambios al aviso</h3>
+            <h2 className="text-xl font-bold text-brand-dark mt-8 mb-4">Cambios al aviso</h2>
             <p>Las modificaciones se publicarán en el sitio web oficial.</p>
           </div>
         </div>
