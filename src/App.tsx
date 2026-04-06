@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link, useParams, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useParams, useLocation, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
+  Briefcase,
   Building2, 
   CheckCircle2, 
   ArrowRight, 
@@ -33,7 +34,7 @@ const servicesData = [
     icon: Scale,
     title: "Soluciones Contables y Jurídicas",
     description: "Transparencia financiera y respaldo legal para sus activos.",
-    image: "/about-1.webp",
+    image: "/servicios-1.webp",
     features: [
       "Recaudación y Cobranza",
       "Contabilidad e Informes Financieros",
@@ -48,7 +49,7 @@ const servicesData = [
     icon: ClipboardCheck,
     title: "Operación, Gestión y Control",
     description: "Supervisión profesional para garantizar la eficiencia operativa.",
-    image: "/about-2.webp",
+    image: "/servicios-2.webp",
     features: [
       "Supervisión constante a la infraestructura",
       "Elaboración y control de programas operativos",
@@ -94,6 +95,22 @@ const ScrollToAnchor = () => {
   return null;
 };
 
+const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, callback?: () => void) => {
+  const isHomePage = window.location.pathname === '/';
+  if (href.startsWith('/#') && isHomePage) {
+    const targetId = href.replace('/#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      e.preventDefault();
+      element.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', `/${href.replace('/', '')}`);
+      if (callback) callback();
+    }
+  } else {
+    if (callback) callback();
+  }
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
@@ -104,23 +121,6 @@ const Navbar = () => {
     { name: 'Nosotros', href: '/#nosotros' },
     { name: 'Contacto', href: '/#contacto' },
   ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isHomePage = window.location.hash === '' || window.location.hash === '#/' || window.location.hash.startsWith('#/#');
-    if (href.startsWith('/#') && isHomePage) {
-      const targetId = href.replace('/#', '');
-      const element = document.getElementById(targetId);
-      if (element) {
-        e.preventDefault();
-        element.scrollIntoView({ behavior: 'smooth' });
-        // Update hash to include the section without breaking HashRouter
-        window.history.pushState(null, '', `#/#${targetId}`);
-        setIsOpen(false);
-      }
-    } else {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
@@ -152,7 +152,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href, () => setIsOpen(false))}
                 className="text-sm font-medium text-slate-600 hover:text-brand-green transition-colors"
               >
                 {link.name}
@@ -160,7 +160,7 @@ const Navbar = () => {
             ))}
             <Link
               to="/#contacto"
-              onClick={(e) => handleNavClick(e, '/#contacto')}
+              onClick={(e) => handleNavClick(e, '/#contacto', () => setIsOpen(false))}
               className="bg-brand-green text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-dark transition-all shadow-sm"
             >
               Solicitar Cotización
@@ -190,7 +190,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link.href, () => setIsOpen(false))}
                   className="block px-3 py-4 text-base font-medium text-slate-600 hover:text-brand-green border-b border-slate-50"
                 >
                   {link.name}
@@ -199,7 +199,7 @@ const Navbar = () => {
               <div className="pt-4">
                 <Link
                   to="/#contacto"
-                  onClick={(e) => handleNavClick(e, '/#contacto')}
+                  onClick={(e) => handleNavClick(e, '/#contacto', () => setIsOpen(false))}
                   className="block w-full text-center bg-brand-green text-white px-5 py-3 rounded-xl text-base font-semibold"
                 >
                   Solicitar Cotización
@@ -224,48 +224,43 @@ const ServiceCard = ({ id, icon: Icon, title, description, features, image, inde
     <Link to={`/servicio/${id}`} className="block h-full">
       <motion.div 
         whileHover={{ y: -5 }}
-        className="h-full rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-green/20 transition-all group flex flex-col md:flex-row relative overflow-hidden"
+        className="h-full rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-green/20 transition-all group flex flex-col relative overflow-hidden"
       >
         {image && (
-          <div className="w-full md:w-2/5 relative overflow-hidden shrink-0 aspect-[4/5] md:aspect-auto">
+          <div className="w-full relative overflow-hidden shrink-0 aspect-[3/4]">
             <img 
               src={image} 
               alt={`Servicio de ${title} en Villahermosa`} 
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               referrerPolicy="no-referrer"
               loading="lazy"
-              onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/service/400/500"; }}
+              onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/service/400/600"; }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent md:bg-gradient-to-r md:from-black/30 md:to-transparent" />
-            <div className="absolute bottom-4 left-4 md:top-4 md:bottom-auto w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-brand-green transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-brand-green transition-colors">
               <Icon className="text-brand-green group-hover:text-white transition-colors" size={24} />
             </div>
           </div>
         )}
         
-        <div className="p-8 flex flex-col flex-grow md:w-3/5">
+        <div className="p-6 flex flex-col flex-grow">
           {!image && (
             <div className="w-14 h-14 bg-brand-light rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-green transition-colors">
               <Icon className="text-brand-green group-hover:text-white transition-colors" size={28} />
             </div>
           )}
           <h3 className="text-xl font-bold text-brand-dark mb-3">{title}</h3>
-          <p className="text-slate-600 mb-6 leading-relaxed flex-grow">{description}</p>
-          <ul className="space-y-3 mb-8">
-            {features.slice(0, 3).map((feature: string, idx: number) => (
-              <li key={idx} className="flex items-start gap-2 text-sm text-slate-500">
-                <CheckCircle2 size={16} className="text-brand-green mt-0.5 shrink-0" />
+          <p className="text-slate-600 mb-6 leading-relaxed flex-grow text-sm">{description}</p>
+          <ul className="space-y-2 mb-6">
+            {features.slice(0, 4).map((feature: string, idx: number) => (
+              <li key={idx} className="flex items-start gap-2 text-xs text-slate-500">
+                <CheckCircle2 size={14} className="text-brand-green mt-0.5 shrink-0" />
                 <span className="line-clamp-1">{feature}</span>
               </li>
             ))}
-            {features.length > 3 && (
-              <li className="text-sm text-brand-green font-medium italic">
-                + {features.length - 3} servicios más...
-              </li>
-            )}
           </ul>
           <div className="mt-auto flex items-center text-brand-green font-semibold text-sm group-hover:translate-x-2 transition-transform">
-            Ver más información <ArrowRight size={16} className="ml-2" />
+            Ver detalles <ArrowRight size={16} className="ml-2" />
           </div>
         </div>
       </motion.div>
@@ -365,7 +360,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {servicesData.map((service, index) => (
               <ServiceCard key={service.id} index={index} {...service} />
             ))}
@@ -443,7 +438,7 @@ const Home = () => {
             </div>
             
             <div className="relative z-10 md:w-1/3 flex justify-center">
-               <div className="w-40 h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm overflow-hidden p-4">
+               <div className="w-48 h-32 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl backdrop-blur-sm overflow-hidden p-6">
                   {!crgLogoError ? (
                     <img 
                       src="/crg-logo.png" 
@@ -453,7 +448,7 @@ const Home = () => {
                       onError={() => setCrgLogoError(true)}
                     />
                   ) : (
-                    <Shield size={72} className="text-brand-green" />
+                    <Shield size={64} className="text-brand-green" />
                   )}
                </div>
             </div>
@@ -588,7 +583,7 @@ const Home = () => {
               <img 
                 src="/iso27001.png" 
                 alt="Certificación ISO 27001 - G4W Consultores" 
-                className="h-32 md:h-40 w-auto object-contain drop-shadow-xl"
+                className="h-20 md:h-24 w-auto object-contain drop-shadow-lg"
                 referrerPolicy="no-referrer"
                 loading="lazy"
                 onError={(e) => { 
@@ -596,8 +591,8 @@ const Home = () => {
                   e.currentTarget.nextElementSibling?.classList.remove('hidden'); 
                 }}
               />
-              <div className="hidden h-32 w-64 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center shadow-lg">
-                <ShieldCheck className="w-16 h-16 text-brand-green" />
+              <div className="hidden h-24 w-48 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center shadow-md">
+                <ShieldCheck className="w-12 h-12 text-brand-green" />
               </div>
             </motion.div>
             
@@ -766,6 +761,19 @@ const ServiceDetail = () => {
 
 const Footer = () => {
   const [logoError, setLogoError] = useState(false);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isHomePage = window.location.pathname === '/';
+    if (href.startsWith('/#') && isHomePage) {
+      const targetId = href.replace('/#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        e.preventDefault();
+        element.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', `/${href.replace('/', '')}`);
+      }
+    }
+  };
   
   return (
   <footer className="bg-slate-50 border-t border-slate-200 pt-20 pb-10">
@@ -795,6 +803,22 @@ const Footer = () => {
           <p className="text-slate-500 max-w-sm mb-8">
             Servicio Integral de Administración de Activos. Optimizamos la gestión de sus recursos para garantizar la máxima rentabilidad y seguridad.
           </p>
+        </div>
+        
+        <div>
+          <h3 className="font-bold text-brand-dark mb-6">Enlaces Rápidos</h3>
+          <ul className="space-y-4">
+            <li>
+              <Link to="/#servicios" onClick={(e) => handleNavClick(e, '/#servicios')} className="text-slate-500 hover:text-brand-green transition-colors text-sm">
+                Servicios
+              </Link>
+            </li>
+            <li>
+              <Link to="/#nosotros" onClick={(e) => handleNavClick(e, '/#nosotros')} className="text-slate-500 hover:text-brand-green transition-colors text-sm">
+                Nosotros
+              </Link>
+            </li>
+          </ul>
         </div>
         
         <div>
@@ -908,7 +932,7 @@ const FloatingWhatsApp = () => {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ScrollToAnchor />
       <div className="min-h-screen selection:bg-brand-green/20 flex flex-col">
         <Navbar />
@@ -923,6 +947,6 @@ export default function App() {
         <Footer />
         <FloatingWhatsApp />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
